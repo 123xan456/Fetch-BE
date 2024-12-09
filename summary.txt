@@ -1,0 +1,15 @@
+1.Why did you choose the tools, libraries, and language you used for the coding exercise?
+
+    Tools and libraries - flask, flask-restful, requests, pandas
+
+    Language - Python
+
+
+2. What are the advantages and disadvantages of your solution?
+
+    I have implemented a simple data storage system using a CSV file. This design allows the user's previous transactions
+    to be stored and preserved even if the API is shut down.
+
+
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
