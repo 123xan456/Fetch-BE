@@ -12,4 +12,10 @@ Install the required Python libraries listed in the `requirements.txt` file. Run
 ```bash
 pip install -r requirements.txt
 python3 server.py
+```
+
+In a separate terminal:
+
+```bash
 python3 client.py
+```
