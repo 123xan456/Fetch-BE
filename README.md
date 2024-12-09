@@ -4,7 +4,7 @@
 This project consists of a simple server and client application. The server exposes API endpoints, and the client interacts with the server. 
 The instructions below guide you through the setup and execution of the project.
 
-This service requires Python 3.8 and above, and pip
+This service requires Python3 and pip
 
 ## Setup Instructions
 
