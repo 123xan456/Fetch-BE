@@ -10,19 +10,21 @@ This service requires Python 3.8 and above, and pip
 
 ### 1. Clone the repo
 
-### 2. Install Dependencies
+### 2. Set up a virtual environment if needed (optional)
+
+### 3. Install Dependencies
 Install the required Python libraries listed in the `requirements.txt` file. Run the following command in your terminal:
 
 ```bash
 pip install -r requirements.txt
 ```
-### 3. Run server
+### 4. Run server
 ```bash
 python3 server.py
 ```
 This runs the server and exposes the APIs
 
-### 3. Run client (optional)
+### 5. Run client (optional)
 
 In a separate terminal:
 
