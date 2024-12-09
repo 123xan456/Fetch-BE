@@ -10,7 +10,7 @@ This service requires Python 3.8 and above, and pip
 
 ### 1. Clone the repo
 
-### 2. Set up a virtual environment if needed (optional)
+### 2. Set up a virtual environment (optional)
 
 ### 3. Install Dependencies
 Install the required Python libraries listed in the `requirements.txt` file. Run the following command in your terminal:
