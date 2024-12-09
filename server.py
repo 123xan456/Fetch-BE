@@ -22,6 +22,7 @@ class Add(Resource):
             }
             data = pd.DataFrame(data)
             
+            #concatenate to dataframe, update CSV
             df = pd.concat([df, data], ignore_index=True)      
             df.to_csv(datafile, index = False)
             return 200            
@@ -42,6 +43,7 @@ class Spend(Resource):
             payers = {}
             spend_amount = data["points"]
             
+            #ensure valid spend amount and enough total points
             if spend_amount <= 0:
                 return {'error': 'Invalid spend amount'}, 400
         
@@ -49,17 +51,20 @@ class Spend(Resource):
             if spend_amount > total_points:
                 return {'error': 'Insufficient total points'}, 400
             
+            
             for record in df_sort.itertuples():
                 #get amount to deduct
                 payer_amount = int(record.points)
                 amount = min(payer_amount, spend_amount)
                 spend_amount -= amount
                 
+                #add to user's deducted amount
                 payers[record.payer] = payers.get(record.payer, 0) - amount
                 df_sort.at[record.Index, 'points'] -= amount 
                 
                 if spend_amount == 0: #done spending
                     res = [{"payer": key, "points": val} for key,val in payers.items()]
+                    #update df and csv
                     df = df_sort
                     df_sort.to_csv(datafile, index=False)
                     return res, 200
@@ -75,6 +80,8 @@ class Balance(Resource):
         try:
             global df       
             res = {}
+            
+            # create mapping
             for record in df.itertuples():
                 res[record.payer] = res.get(record.payer, 0) + record.points
             return res, 200
@@ -89,6 +96,8 @@ class Clear(Resource):
     def get(self):
         try:
             global df 
+            
+            # clear all rows
             df = df.iloc[0:0]
             df.to_csv(datafile, index=False)
             
