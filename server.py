@@ -41,6 +41,14 @@ class Spend(Resource):
             
             payers = {}
             spend_amount = data["points"]
+            
+            if spend_amount <= 0:
+                return {'error': 'Invalid spend amount'}, 400
+        
+            total_points = df['points'].sum()
+            if spend_amount > total_points:
+                return {'error': 'Insufficient total points'}, 400
+            
             for record in df_sort.itertuples():
                 #get amount to deduct
                 payer_amount = int(record.points)
@@ -55,9 +63,6 @@ class Spend(Resource):
                     df = df_sort
                     df_sort.to_csv(datafile, index=False)
                     return res, 200
-                
-            #if reached here, not enough points 
-            return {'error': "You don't have enough points!"}, 400
                         
         except Exception as e:
             return {'error': str(e)}, 400            
