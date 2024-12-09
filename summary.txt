@@ -2,14 +2,58 @@
 
     Tools and libraries - flask, flask-restful, requests, pandas
 
+    I chose to use Flask as it is the simplest and most lightweight library to create APIs via Python.
+    The selection of flask-restful also allowed me to adhere to the REST requirements easily
+
+    Requests allowed me to make simple HTTP requests, while providing me the utilities for automatic JSON
+    conversion.
+
+    I included Pandas as I believed it would be helpful to maintain data storage using CSVs.
+    The builtin CSV library of Python did not include utilities for dataframe manipulation and sorting,
+    so selecting Pandas was an obvious choice.
+
     Language - Python
+
+    I built the client and service in Python as it provides the best readability in the context of this project.
+    It also provides more utilities and computational tools (than JavaScript, my other option) for the task, 
+    which involved data storage via CSVs.
+
+    I felt that, due to the volume of submissions, it would be much more helpful for readers to have shorter and less files
+    which I believe Python achieves better than JavaScript. 
 
 
 2. What are the advantages and disadvantages of your solution?
 
+    Advantages
+
     I have implemented a simple data storage system using a CSV file. This design allows the user's previous transactions
-    to be stored and preserved even if the API is shut down.
+    to be stored and preserved even if the API is shut down. If the user wants to start fresh, I have also provided a function
+    allowing the user to clear all the previous transactions via a call to the /clear API path.
 
+    Another advantage is that since my system utilizes Flask-restful and the requests library, all data is sent as JSON
+    automatically, adhering to RESTful principles.
 
+    Disadvantages
 
+    For scalability, I could have implemented a web-server using Node.js to allow for asynchronicity, improving the runtime. 
+    However, this service was simple enough to trade the slight runtime improvement of Node.js for the libraries (Pandas, Flask) 
+    and ease-of-use of Python
+
+    Additionally, the dataframe is sorted by timestamp every invocation of /spend to find the oldest transaction, meaning that /spend 
+    could take O(nlogn) time to run. Another solution that would have provided O(logn) time instead
+    is to load each transaction into a priority queue during runtime using Python's heapq. However, this would 
+    introduce a higher memory requirement to store the heap, and so I opted for an O(nlogn) runtime instead as the efficiency drop was 
+    negligible.
+    
 3. What has been a favorite school/personal project thus far? What about it that challenged you?
+
+    My favorite project in school is my work as an Automation Software Developer in a chemical engineering lab at my university. Put shortly, 
+    I work on programming a robot to automate the synthesis and chemical testing of battery electrolytes. It has been my favourite project thus 
+    far as I only had experience with app development only prior to starting. As such, there was so much to learn from the get go as the environment 
+    was completely foreign to me. Besides the chemistry, the software related challenges included data storage, building GUIs, and optimizing the 
+    robot's algorithms. In terms of technical skill, I learned of so many different data structures and libraries, and this time spent brainstorming 
+    solutions has increased my creativity and problem solving immensely. Above all, I've learned how to create a plan-of-attack every time I am 
+    faced with a new challenge - a skill that'll serve me greatly as an intern at Fetch or anywhere else.
+
+    Though I was particularly challenged by the pace of having to pump out results, my ability to learn quickly and push through technical obstacles
+    carried me through this project. I have no doubts that these skills will allow me to thrive and be helpful to any teams/projects I am a part of.

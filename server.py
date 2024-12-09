@@ -8,6 +8,9 @@ datafile = "points_sheet.csv"
 df = pd.read_csv(datafile)
 
 class Add(Resource):
+    """
+    Adds new point transaction
+    """
     def post(self):
         try:
             global df
@@ -27,6 +30,9 @@ class Add(Resource):
             return {'error': str(e)}, 400
     
 class Spend(Resource):
+    """
+    Deducts points from user 
+    """
     def post(self):
         try:
             global df
@@ -57,6 +63,9 @@ class Spend(Resource):
             return {'error': str(e)}, 400            
 
 class Balance(Resource):
+    """
+    Returns payers and balance points
+    """
     def get(self):   
         try:
             global df       
@@ -68,10 +77,25 @@ class Balance(Resource):
         except Exception as e:
             return {'error': str(e)}, 400
     
+class Clear(Resource):
+    """
+    Clears CSV of all point transactions
+    """
+    def get(self):
+        try:
+            global df 
+            df = df.iloc[0:0]
+            df.to_csv(datafile, index=False)
+            
+            return 200
+        except Exception as e:
+            return {'error': str(e)}, 400
+    
 # attach resource to URL path
 api.add_resource(Add, '/add') 
 api.add_resource(Spend, '/spend') 
 api.add_resource(Balance, '/balance') 
+api.add_resource(Clear, '/clear') 
 
 if __name__ == '__main__': 
     app.run(host = "localhost", port = 8000) 
